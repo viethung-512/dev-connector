@@ -1,0 +1,41 @@
+.logo {
+  display: flex !important;
+  align-items: center;
+
+  color: #fff !important;
+  font-size: 24px !important;
+  line-height: 24px !important;
+  font-weight: 600;
+}
+
+.logo:hover {
+  color: var(--primary-color) !important;
+}
+
+.logo__icon {
+  font-size: 1.5em;
+  margin-right: 8px;
+}
+
+.menubar {
+  background-color: transparent !important;
+  color: #fff !important;
+  border-bottom: unset !important;
+}
+
+.menubar-item {
+  border-bottom: unset !important;
+}
+
+.menubar-item:hover {
+  border-bottom: unset !important;
+}
+
+.auth-menu {
+  display: block;
+  height: 100%;
+}
+
+.avatar {
+  margin-right: 8px !important;
+}
