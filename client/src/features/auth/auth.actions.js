@@ -7,6 +7,8 @@ import {
 import { closeModal } from '../modal/modal.actions';
 import { setAuthToken } from '../../app/utils/helper';
 import { SET_AUTH_USER, LOGOUT_USER } from './auth.constants';
+import { CLEAR_PROFILE } from '../profile/profile.constants';
+import { getAuthProfile } from '../profile/profile.actions';
 
 export const loadAuthenticatedUser = () => async dispatch => {
   setAuthToken();
@@ -19,7 +21,7 @@ export const loadAuthenticatedUser = () => async dispatch => {
   }
 };
 
-export const login = userCredentials => async dispatch => {
+export const login = (userCredentials, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -35,6 +37,7 @@ export const login = userCredentials => async dispatch => {
     localStorage.setItem('token', token);
 
     dispatch(loadAuthenticatedUser());
+    dispatch(getAuthProfile(history));
     dispatch(asyncActionFinish());
     dispatch(closeModal());
   } catch (err) {
@@ -43,7 +46,7 @@ export const login = userCredentials => async dispatch => {
   }
 };
 
-export const register = userCredentials => async dispatch => {
+export const register = (userCredentials, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -59,6 +62,7 @@ export const register = userCredentials => async dispatch => {
     localStorage.setItem('token', token);
 
     dispatch(loadAuthenticatedUser());
+    dispatch(getAuthProfile(history));
     dispatch(asyncActionFinish());
     dispatch(closeModal());
   } catch (err) {
@@ -67,7 +71,8 @@ export const register = userCredentials => async dispatch => {
   }
 };
 
-export const logout = () => {
+export const logout = () => dispatch => {
   localStorage.removeItem('token');
-  return { type: LOGOUT_USER };
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT_USER });
 };

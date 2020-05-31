@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { openModal } from '../../modal/modal.actions';
 import { login } from '../auth.actions';
+import { asyncActionFinish } from '../../async/async.actions';
 
 const { Text } = Typography;
 
 function LoginForm(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [form] = Form.useForm();
 
   const { loading, errors } = useSelector(state => state.async);
+
+  useEffect(() => {
+    return () => {
+      dispatch(asyncActionFinish());
+    };
+
+    // eslint-disable-next-line
+  }, []);
 
   const handleSubmit = values => {
     const userCredentials = {
@@ -19,7 +30,7 @@ function LoginForm(props) {
       password: values.password,
     };
 
-    dispatch(login(userCredentials));
+    dispatch(login(userCredentials, history));
   };
   const signUp = () => dispatch(openModal('ModalRegister'));
 

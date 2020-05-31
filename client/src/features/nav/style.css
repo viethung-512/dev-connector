@@ -31,6 +31,18 @@
   border-bottom: unset !important;
 }
 
+.menubar-item-link {
+  color: #fff !important;
+}
+
+.menubar-item-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.menubar-item-link--active {
+  color: var(--primary-color) !important;
+}
+
 .auth-menu {
   display: block;
   height: 100%;

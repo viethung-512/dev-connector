@@ -17,7 +17,7 @@ function HomePage(props) {
           Create a developer profile/portfolio, share posts and get help from
           other developers
         </Text>
-        <Link to='/posts'>
+        <Link to='/dashboard'>
           <Button
             className='homepage__button'
             type='primary'

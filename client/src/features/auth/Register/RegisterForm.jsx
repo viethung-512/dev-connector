@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, Typography } from 'antd';
 import { openModal } from '../../modal/modal.actions';
+import { register } from '../auth.actions';
+import { asyncActionFinish } from '../../async/async.actions';
 
 const { Text } = Typography;
 
 function RegisterForm(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [form] = Form.useForm();
   const { loading, errors } = useSelector(state => state.async);
+
+  useEffect(() => {
+    return () => {
+      dispatch(asyncActionFinish());
+    };
+
+    // eslint-disable-next-line
+  }, []);
 
   const validateConfirmPassword = (rule, value) => {
     const currentPassword = form.getFieldValue('password');
@@ -19,7 +31,8 @@ function RegisterForm(props) {
 
     return Promise.resolve();
   };
-  const handleSubmit = values => console.log(values);
+  const handleSubmit = userCredentials =>
+    dispatch(register(userCredentials, history));
   const login = () => dispatch(openModal('ModalLogin'));
 
   return (

@@ -7,9 +7,9 @@ import { Layout } from 'antd';
 import Toastr from './common/Toastr';
 import Navbar from '../../features/nav/Navbar';
 import HomePage from '../../features/home/HomePage';
-import LoginForm from '../../features/auth/Login/LoginForm';
-import RegisterForm from '../../features/auth/Register/RegisterForm';
 import ModalManger from '../../features/modal/ModalManger';
+import Dashboard from '../../features/dashboard/Dashboard';
+import PrivateRoute from './common/PrivateRoute';
 
 const { Header, Content } = Layout;
 
@@ -28,8 +28,7 @@ function App() {
 
               <Content className='content'>
                 <Switch>
-                  <Route exact path='/login' component={LoginForm} />
-                  <Route exact path='/register' component={RegisterForm} />
+                  <PrivateRoute exact path='/dashboard' component={Dashboard} />
                 </Switch>
               </Content>
             </Fragment>

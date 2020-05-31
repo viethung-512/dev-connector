@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Avatar } from 'antd';
 import { LogoutOutlined, ProfileOutlined } from '@ant-design/icons';
 
@@ -18,10 +19,31 @@ function SignedInMenu({ authUser, logout }) {
   return (
     <Menu className='menubar' mode='horizontal' defaultSelectedKeys='posts'>
       <Menu.Item className='menubar-item' key='developer'>
-        Developers
+        <NavLink
+          to='/developers'
+          className='menubar-item-link'
+          activeClassName='menubar-item-link--active'
+        >
+          Developers
+        </NavLink>
       </Menu.Item>
       <Menu.Item className='menubar-item' key='posts'>
-        Posts
+        <NavLink
+          to='/posts'
+          className='menubar-item-link'
+          activeClassName='menubar-item-link--active'
+        >
+          Posts
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item className='menubar-item' key='dashboard'>
+        <NavLink
+          to='/dashboard'
+          className='menubar-item-link'
+          activeClassName='menubar-item-link--active'
+        >
+          Dashboard
+        </NavLink>
       </Menu.Item>
       <Menu.Item className='menubar-item' key='auth'>
         <Dropdown overlay={signedInMenu}>
