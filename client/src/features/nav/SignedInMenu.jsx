@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Avatar } from 'antd';
+import { NavLink, Link } from 'react-router-dom';
+import { Menu, Dropdown, Avatar, Typography } from 'antd';
 import { LogoutOutlined, ProfileOutlined } from '@ant-design/icons';
 
 function SignedInMenu({ authUser, logout }) {
@@ -9,7 +9,9 @@ function SignedInMenu({ authUser, logout }) {
   const signedInMenu = (
     <Menu mode='vertical'>
       <Menu.Item key='profile' icon={<ProfileOutlined />}>
-        My Profile
+        <Link to='/profile/me'>
+          <Typography.Text>My Profile</Typography.Text>
+        </Link>
       </Menu.Item>
       <Menu.Item key='logout' icon={<LogoutOutlined />} onClick={logout}>
         Logout

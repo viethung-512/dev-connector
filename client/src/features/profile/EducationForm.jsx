@@ -61,7 +61,7 @@ function EducationForm(props) {
           disabled={current}
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item name='description'>
         <Input.TextArea rows={3} placeholder='Program Description' />
       </Form.Item>
       <Form.Item>

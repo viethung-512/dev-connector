@@ -101,11 +101,18 @@ router.post(
           { new: true }
         );
 
+        profile = await Profile.findById(profile.id).populate('user', [
+          'name',
+          'avatar',
+        ]);
+
         return res.json(profile);
       }
 
       profile = new Profile(profileFields);
       await profile.save();
+
+      console.log(profile);
 
       return res.json(profile);
     } catch (err) {

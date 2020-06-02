@@ -6,17 +6,12 @@ import { formatRowData } from '../../app/utils/helper';
 const { Title, Text } = Typography;
 
 const ExperienceActions = ({ deleteExperience, deleteLoading }) => (
-  <Fragment>
-    <Button
-      danger
-      icon={<DeleteOutlined />}
-      type='primary'
-      onClick={deleteExperience}
-      loading={deleteLoading}
-    >
-      Delete
-    </Button>
-  </Fragment>
+  <Button
+    danger
+    icon={<DeleteOutlined />}
+    onClick={deleteExperience}
+    loading={deleteLoading}
+  />
 );
 
 function Experience({
@@ -43,7 +38,6 @@ function Experience({
       key: 'year',
     },
     {
-      title: 'Actions',
       key: 'actions',
       render: item => (
         <ExperienceActions
@@ -56,7 +50,9 @@ function Experience({
 
   return (
     <Fragment>
-      <Title level={2}>Experience Credentials</Title>
+      <Title level={2} className='dashboard-container__title'>
+        Experience Credentials
+      </Title>
       {experience.length > 0 ? (
         <Table
           bordered

@@ -10,13 +10,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './app/redux/store';
 import { loadAuthenticatedUser } from './features/auth/auth.actions';
-import { getAuthProfile } from './features/profile/profile.actions';
 
 const rootEl = document.getElementById('root');
 
 if (localStorage.getItem('token')) {
   store.dispatch(loadAuthenticatedUser());
-  store.dispatch(getAuthProfile());
 }
 
 const render = () => {

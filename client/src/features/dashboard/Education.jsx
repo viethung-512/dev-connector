@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Typography, Table, Button } from 'antd';
-import { Fragment } from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
 import { formatRowData } from '../../app/utils/helper';
 
 const { Title, Text } = Typography;
 
 const EducationActions = ({ deleteEducation, deleteLoading }) => (
-  <Fragment>
-    <Button
-      danger
-      icon={<DeleteOutlined />}
-      type='primary'
-      onClick={deleteEducation}
-      loading={deleteLoading}
-    >
-      Delete
-    </Button>
-  </Fragment>
+  <Button
+    danger
+    icon={<DeleteOutlined />}
+    onClick={deleteEducation}
+    loading={deleteLoading}
+  />
 );
 
 function Education({
@@ -44,7 +38,6 @@ function Education({
       key: 'year',
     },
     {
-      title: 'Actions',
       key: 'actions',
       render: item => (
         <EducationActions
@@ -57,7 +50,9 @@ function Education({
 
   return (
     <Fragment>
-      <Title level={2}>Education Credentials</Title>
+      <Title level={2} className='dashboard-container__title'>
+        Education Credentials
+      </Title>
       {education.length > 0 ? (
         <Table
           bordered

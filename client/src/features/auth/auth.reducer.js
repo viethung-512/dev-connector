@@ -1,7 +1,9 @@
 import { SET_AUTH_USER, LOGOUT_USER } from './auth.constants';
 
+const token = localStorage.getItem('token');
+
 const authReducerInitialState = {
-  authenticated: null,
+  authenticated: token ? true : false,
   user: {},
 };
 const authReducer = (state = authReducerInitialState, { type, payload }) => {

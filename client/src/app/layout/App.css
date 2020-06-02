@@ -1,19 +1,17 @@
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-
-  background-color: #343a40;
-
-  display: flex;
-  justify-content: space-between;
-
-  border-bottom: 1px solid var(--primary-color);
-}
-
 .content {
   margin-top: 64px;
 
-  padding: 16px 24px;
+  padding: 40px 100px;
+}
+
+@media (max-width: 825px) {
+  .content {
+    padding: 40px 50px;
+  }
+}
+
+@media (max-width: 550px) {
+  .content {
+    padding: 40px 24px;
+  }
 }

@@ -5,6 +5,8 @@ import {
   ADD_EDUCATION,
   DELETE_EDUCATION,
   CLEAR_PROFILE,
+  SET_PROFILES,
+  SET_REPOSITORIES,
 } from './profile.constants';
 
 const profileReducerInitialState = {
@@ -22,6 +24,16 @@ const profileReducer = (
       return {
         ...state,
         current: payload.profile,
+      };
+    case SET_PROFILES:
+      return {
+        ...state,
+        profiles: payload.profiles,
+      };
+    case SET_REPOSITORIES:
+      return {
+        ...state,
+        repositories: payload.repositories,
       };
     case CLEAR_PROFILE:
       return {

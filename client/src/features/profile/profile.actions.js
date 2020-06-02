@@ -10,28 +10,27 @@ import {
   DELETE_EXPERIENCE,
   ADD_EDUCATION,
   DELETE_EDUCATION,
+  SET_PROFILES,
+  SET_REPOSITORIES,
+  CLEAR_PROFILE,
 } from './profile.constants';
 import { toastr } from 'react-redux-toastr';
 import { closeModal } from '../modal/modal.actions';
 import { logout } from '../auth/auth.actions';
 
-export const profileActions = (profileInfo, edit = false) => async dispatch => {
-  dispatch(asyncActionStart('profileAction'));
-  const successMessage = edit
-    ? 'Your profile has been updated'
-    : 'Your profile has been created';
-
+export const getProfiles = (authUserId = null) => async dispatch => {
+  dispatch(asyncActionStart('getProfiles'));
   try {
-    const res = await axios.post('/api/profile', profileInfo);
-    const profile = res.data;
+    const res = await axios.get('/api/profile');
+    const profiles = res.data.filter(
+      profile => profile.user._id !== authUserId
+    );
 
-    dispatch({ type: SET_CURRENT_PROFILE, payload: { profile } });
+    dispatch({ type: SET_PROFILES, payload: { profiles } });
     dispatch(asyncActionFinish());
-    dispatch(closeModal());
-    toastr.success('Success', successMessage);
   } catch (err) {
-    dispatch(asyncActionError(err));
-    toastr.error('Oops', 'Something went wrong, please try again');
+    console.log(err.response.data);
+    dispatch(asyncActionError(err.response.data));
   }
 };
 
@@ -60,6 +59,64 @@ export const getAuthProfile = history => async dispatch => {
         status: err.response.status,
       })
     );
+  }
+};
+
+export const getProfile = userId => async dispatch => {
+  dispatch(asyncActionStart('getProfile'));
+
+  try {
+    const res = await axios.get(`/api/profile/user/${userId}`);
+    const profile = res.data;
+
+    dispatch({ type: SET_CURRENT_PROFILE, payload: { profile } });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(
+      asyncActionError({
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const getGithubRepositories = githubUsername => async dispatch => {
+  dispatch(asyncActionStart('getGithubRepositories'));
+
+  try {
+    const res = await axios.get(`/api/profile/github/${githubUsername}`);
+    const repositories = res.data;
+
+    dispatch({ type: SET_REPOSITORIES, payload: { repositories } });
+    dispatch(asyncActionFinish());
+  } catch (err) {
+    dispatch(
+      asyncActionError({
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const profileActions = (profileInfo, edit = false) => async dispatch => {
+  dispatch(asyncActionStart('profileAction'));
+  const successMessage = edit
+    ? 'Your profile has been updated'
+    : 'Your profile has been created';
+
+  try {
+    const res = await axios.post('/api/profile', profileInfo);
+    const profile = res.data;
+
+    dispatch({ type: SET_CURRENT_PROFILE, payload: { profile } });
+    dispatch(asyncActionFinish());
+    dispatch(closeModal());
+    toastr.success('Success', successMessage);
+  } catch (err) {
+    dispatch(asyncActionError(err));
+    toastr.error('Oops', 'Something went wrong, please try again');
   }
 };
 
@@ -159,3 +216,5 @@ export const deleteAccount = () => dispatch => {
     },
   });
 };
+
+export const clearProfile = () => ({ type: CLEAR_PROFILE });

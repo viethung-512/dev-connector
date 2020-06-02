@@ -1,3 +1,18 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+
+  background-color: #343a40;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid var(--primary-color);
+}
+
 .logo {
   display: flex !important;
   align-items: center;
@@ -15,6 +30,10 @@
 .logo__icon {
   font-size: 1.5em;
   margin-right: 8px;
+}
+
+.menubar--sm {
+  display: none;
 }
 
 .menubar {
@@ -50,4 +69,24 @@
 
 .avatar {
   margin-right: 8px !important;
+}
+
+.logo-mobile {
+  background-color: red;
+}
+
+@media (max-width: 700px) {
+  .header {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 630px) {
+  .menubar {
+    display: none;
+  }
+
+  .menubar--sm {
+    display: block;
+  }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Spin, Divider, Button, Typography } from 'antd';
@@ -11,6 +11,8 @@ import {
   deleteExperience,
   deleteEducation,
   deleteAccount,
+  clearProfile,
+  getAuthProfile,
 } from '../profile/profile.actions';
 
 const { Title } = Typography;
@@ -23,6 +25,15 @@ function Dashboard(props) {
   const profile = useSelector(state => state.profile.current);
   const experience = profile ? profile.experience : [];
   const education = profile ? profile.education : [];
+
+  useEffect(() => {
+    dispatch(getAuthProfile());
+    return () => {
+      dispatch(clearProfile());
+    };
+
+    // eslint-disable-next-line
+  }, []);
 
   const getProfileLoading = type === 'getProfile' ? loading : false;
   const exDeleteLoading = type === 'deleteExperience' ? loading : false;

@@ -56,6 +56,9 @@ function ExperienceForm(props) {
           disabled={current}
         />
       </Form.Item>
+      <Form.Item name='description'>
+        <Input.TextArea rows={3} placeholder='Job Description' />
+      </Form.Item>
       <Form.Item>
         <Space>
           <Button type='primary' htmlType='submit' loading={loading}>

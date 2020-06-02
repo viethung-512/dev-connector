@@ -1,7 +1,3 @@
-.dashboard {
-  padding: 24px 100px;
-}
-
 .dashboard-header__title {
   color: var(--primary-color) !important;
   font-size: 3rem !important;
@@ -16,4 +12,10 @@
 
 .dashboard-header__action {
   font-size: 16px !important;
+}
+
+@media (max-width: 750px) {
+  .dashboard-container__title {
+    font-size: 24px !important;
+  }
 }
